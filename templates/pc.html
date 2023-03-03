@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  ПК
+{% endblock %}
+
+{% block main %}
+    <main class="container py-5 text-center">
+        <div class="toolbar">
+            
+            <button>
+                <div class="add_button">
+                    <div class="text_button"><img src="../static/images/icons/search.png" alt=""></div>
+                </div>
+            </button>
+            <button>
+                <div class="add_button">
+                    <div class="text_button"><img src="../static/images/icons/plus.png" alt=""></div>
+                </div>
+            </button>
+        </div>
+        <div class='scroll-table'>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-start"><div>ID</div></th>
+                        <th class="text-start"><div>Тип</div></th>
+                        <th class="text-start"><div>Класс</div></th>
+                        <th class="text-start"><div>Материнская плата</div></th>
+                        <th class="text-start"><div>ОЗУ</div></th>
+                        <th class="text-start"><div>Жесткий диск</div></th>
+                        <th class="text-start"><div>Видеокарта</div></th>
+                        <th class="text-start"><div>Процессор</div></th>
+                        <th class="text-start"><div>Наличие CD-rom</div></th>
+                        <th class="text-start"><div>Наличие внешней сетевой карты</div></th>
+                        <th class="text-start"><div>Версия О</div>С</th>
+                        <th class="text-start"><div>ПО</div></th>
+                        <th class="text-start"><div>Инфентарный номер</div></th>
+                        <th class="text-start"><div>Сетевое название</div></th>
+                        <th class="text-start"><div>Имя пользователя</div></th>
+                        <th class="text-start"><div>Имя пользователя</div></th>
+                        <th class="text-start"><div>IP адрес</div></th>
+                        <th class="text-start"><div>Внешний IP адрес</div></th>
+                        <th class="text-start"><div>Номер требования</div></th>
+                        <th class="text-start"><div>Имя пользователя</div></th>
+    
+                    </tr>
+                </thead>
+            </table>
+                <div class="scroll-table-body ">
+                <table>
+                <tbody >
+                    <tr>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                        <td class="text-start"><input class="search" type="text"></td>
+                    </tr>
+                {% for stock in stocks %}
+                
+                    <tr>
+                        <td class="text-start">{{ stock["symbol"] }}</td>
+                        <td class="text-start">{{ stock["name"] }}</td>
+                        <td class="text-start">{{ stock["count"] }}</td>
+                        <td class="text-start">{{ stock["price"] }}</td>
+                        <td class="text-start">{{ stock["total"] }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                
+            </table>
+        </div>
+        </div>
+    </main>
+
+{% endblock %}

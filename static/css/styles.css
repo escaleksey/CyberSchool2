@@ -21,3 +21,71 @@ nav .navbar-brand .green
 {
     color: #2e944b;
 }
+
+
+/* Tool bar  */
+
+.toolbar {
+    display: flex;
+    margin-bottom: 60px;
+}
+
+.toolbar button {
+    padding: 0;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+.text_button {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.text_button img {
+    width: 30px;
+    height: 30px;
+}
+.add_button {
+
+    padding: 0;
+    margin: 5px;
+    position: relative;
+    width: 30px;
+    height: 30px;
+
+}
+
+.search {
+    width: 120px;
+    height: 30px;
+    padding-left: 5px;
+}
+
+th div {
+    width: 120px;
+
+}
+th {
+    padding: 0;
+}
+/* Table */
+
+.scroll-table {
+    overflow-x: scroll;
+}
+.scroll-table table {
+	border: none;
+    
+}
+
+
+.scroll-table-body {
+	height: 300px;
+	margin-top: 0px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #eee;
+}
+
+td {
+    border: black solid 1px;
+}
