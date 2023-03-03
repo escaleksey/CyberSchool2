@@ -17,7 +17,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///database.db")
+db = SQL("sqlite:///static/db/database.db")
 
 
 @app.after_request
@@ -30,6 +30,7 @@ def after_request(response):
 
 
 @app.route("/")
+@app.route("/index")
 @login_required
 def index():
     """Show portfolio of stocks"""
