@@ -51,12 +51,38 @@ def index():
     return render_template(f"index.html", stocks=stocks, cash=cash, summa=summa)
 
 
-@app.route("/title")
+@app.route("/title", methods=["GET", "POST"])
 @login_required
 def title():
     """Show portfolio of stocks"""
     values = (fill.fill_title_table())
-    print(values)
+    count_office_equipment = len(values["office_equipment"])
+    if request.method == "POST":
+        print(request.form)
+        send_to_add_card = {}
+        models = ''
+        for e, v in request.form.items():
+            if '_model' in e:
+                models += v + ', '
+            else:
+                send_to_add_card[e] = v
+
+            send_to_add_card['id_org_tech'] = models
+        try:
+            if not db2.check_exist('pk', int(request.form.get('id_pc'))):
+                return apology("Неверный id ПК", 403)
+            if not db2.check_exist('employee', int(request.form.get('employee'))):
+                return apology("Неверный id Сотрудника", 403)
+            for i in range(1, count_office_equipment + 1):
+                model = f'{i}_model'
+                if request.form.get(model):
+                    if not db2.check_exist('org_tech', int(request.form.get(model))):
+                        return apology("Неверный id орг оборудования", 403)
+            db2.add_card(send_to_add_card)
+            return redirect('/index')
+        except Exception:
+            return apology("Проверьте данные id ПК", 403)
+
     return render_template("title_form.html", values=values)
 
 

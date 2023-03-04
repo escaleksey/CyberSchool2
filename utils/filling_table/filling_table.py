@@ -72,3 +72,7 @@ class FillTable():
         values = [elem[1] for elem in data]
         result = {"office_equipment": values}
         return result
+
+    def add_card(self):
+        pass
+

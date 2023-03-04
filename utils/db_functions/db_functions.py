@@ -166,7 +166,7 @@ class DataBase:
         column_name = "id_" + f"{table_name}"
 
         try:
-            if (cur.execute(f"SELECT id FROM {table_name} WHERE {column_name}='{id}'").fetchone()[0]) != 0:
+            if (cur.execute(f"SELECT {column_name} FROM {table_name} WHERE {column_name}='{id}'").fetchone()[0]) != 0:
                 return 1
         except:
             return 0

@@ -96,6 +96,11 @@ thead {
 }
 
 
+.icon_reset {
+    width: 20px;
+    height: 20px;
+}
+
 /* Title Form */
 
 .item {
@@ -127,3 +132,4 @@ thead {
 .false {
     display: none;
 }
+

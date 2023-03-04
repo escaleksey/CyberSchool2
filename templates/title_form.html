@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/register" method="post">
+    <form action="/title" method="post">
         <div class="item">
             <input autocomplete="off" autofocus class="form-control " id="id_pc" name="id_pc" placeholder="ID ПК" type="text">
             <a href=""><i>все пк...</i></a>
@@ -23,7 +23,7 @@
             <a href=""></a>
         </div>
         <div class="item">
-            <input class="form-control" id="room" name="room" placeholder="Комната" type="text">
+            <input class="form-control" id="room_number" name="room_number" placeholder="Комната" type="text">
             <a href=""></a>
         </div>
         <div class="item">
@@ -44,7 +44,7 @@
         </div>
                 {% for value in values["office_equipment"] %}
                     <div class="item false" id="{{loop.index}}_model_container">
-                        <input class="form-control" type="text" value="" id="{{loop.index}}_model" placeholder="ID {{value}}">
+                        <input class="form-control" type="text" value="" id="{{loop.index}}_model" name="{{loop.index}}_model" placeholder="ID {{value}}">
                         <a  href="/equipment_received"><i>все оборудование...</i></a>
                     </div>
                 
@@ -55,7 +55,7 @@
             
         
         <div class="item">
-            <input class="form-control " id="confirmation" name="confirmation"  type="date">
+            <input class="form-control " id="date" name="date"  type="date">
             <a href=""></a>
         </div>
       
