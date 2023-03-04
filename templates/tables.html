@@ -9,11 +9,13 @@
     <main class="container py-5 text-center">
         <div class="toolbar">
 
-            <button id="search_button" title="ПОИСК">
+            <button id="search_button" title="ПОИСК" type="submit">
                 <div class="add_button">
-                    <div class="text_button"><img src="../static/images/icons/search.png" alt=""></div>
+                    <div class="text_button">
+                      <img src="../static/images/icons/search.png" alt=""></div>
                 </div>
             </button>
+
             <button id="add_button" title="ДОБАВИТЬ ЭЛЕМЕНТ В ТАБЛИЦУ">
                 <div class="add_button">
                     <div class="text_button"><img src="../static/images/icons/plus.png" alt=""></div>
@@ -30,8 +32,7 @@
 
                     </tr>
                 </thead>
-                {{ values['titles'] }}
-                <tbody class="tbody">
+                <tbody class="tbody" id="tbody">
                     <tr id="search_form">
                         {% for i in range(0, values['titles']|length) %}
                             <td class="text-start">
@@ -40,7 +41,7 @@
                         {% endfor %}
                     </tr>
                {% for i in range(0, values['values']|length) %}
-                    <tr>
+                    <tr id="row">
                         {% for value in values['values'][i] %}
                             <td class="text-center">{{value}}</td>
                         {% endfor %}

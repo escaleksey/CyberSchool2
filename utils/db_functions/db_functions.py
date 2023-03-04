@@ -120,15 +120,26 @@ class DataBase:
         """
 
         sql_request = self.search.create_table_search(table_name, **kwargs)
-        print(sql_request)
         cur = self.con.cursor()
 
         try:
             cur.execute(sql_request)
-            return list(cur.fetchall())
+            data = list(cur.fetchall())
+
+            match table_name:
+                case "pk":
+                    data = [
+                        [
+                            elem[0], elem[1], elem[2], elem[3], elem[4], elem[5], elem[6], elem[7],
+                            elem[8], elem[9], elem[10], elem[13], elem[15], elem[16], elem[17],
+                            elem[18], elem[21], elem[22]
+                        ]
+                        for elem in data
+                    ]
+
+            return data
         finally:
             cur.close()
-
 
     def check_exist(self, table_name, id) -> bool:
         """
@@ -143,7 +154,6 @@ class DataBase:
                 """
 
         sql_request = self.search.create_table_search(table_name, id)
-        print(sql_request)
         cur = self.con.cursor()
         column_name = "id_" + f"{table_name}"
 
@@ -154,6 +164,7 @@ class DataBase:
             return 0
         self.con.commit()
         cur.close()
+
 
 """
 db = DataBase(f"{PROJECT_PATH}/static/db/database.db")
