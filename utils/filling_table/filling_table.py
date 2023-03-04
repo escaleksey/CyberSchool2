@@ -65,3 +65,10 @@ class FillTable():
 
         result = {'name': 'ПК', 'titles': titles, 'values': values}
         return result
+
+
+    def fill_title_table(self):
+        data = self.db.get_all_values_org_tech()
+        values = [elem[1] for elem in data]
+        result = {"office_equipment": values}
+        return result

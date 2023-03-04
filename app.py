@@ -55,8 +55,9 @@ def index():
 @login_required
 def title():
     """Show portfolio of stocks"""
-    values = (fill.fill_pc_table())
-    return render_template("title_form.html")
+    values = (fill.fill_title_table())
+    print(values)
+    return render_template("title_form.html", values=values)
 
 
 @app.route("/pc")
