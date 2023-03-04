@@ -43,8 +43,6 @@ def index():
                            {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
                            {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'}], 0, 0
 
-
-
     return render_template(f"index.html", stocks=stocks, cash=cash, summa=summa)
 
 
@@ -52,58 +50,11 @@ def index():
 @login_required
 def pc():
     """Show portfolio of stocks"""
-    stocks, cash, summa = [{"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'}
+    stocks, cash, summa = [{"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'}
+                           for _ in range(10)
                            ], 0, 0
 
-    return render_template(f"pc.html", stocks=stocks, cash=cash, summa=summa)
-
+    return render_template("pc.html", stocks=stocks, cash=cash, summa=summa)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -180,10 +131,10 @@ def register():
 
         hashed_password = generate_password_hash(password)
         db.execute(f"""INSERT INTO users (username, hash) VALUES(?, ?)""", username, hashed_password)
-
-        return render_template(f"register.html")
+        session["user_id"] = username
+        return redirect('/')
     else:
-        return render_template(f"/register.html")
+        return render_template(f"register.html")
 
 
 if __name__ == '__main__':
