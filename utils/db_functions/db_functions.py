@@ -130,6 +130,31 @@ class DataBase:
             cur.close()
 
 
+    def check_exist(self, table_name, id) -> bool:
+        """
+                param: table_name - table for which produced by search
+                param: id - id of value for checking
+
+                example:
+                     db.check_exist(
+                        'pk',
+                        id_pk=2
+                )
+                """
+
+        sql_request = self.search.create_table_search(table_name, id)
+        print(sql_request)
+        cur = self.con.cursor()
+        column_name = "id_" + f"{table_name}"
+
+        try:
+            if cur.execute(f"select id from {table_name} where {column_name} = '{id}'").fetchone()[0] != None:
+                return 1
+        except:
+            return 0
+        self.con.commit()
+        cur.close()
+
 """
 db = DataBase(f"{PROJECT_PATH}/static/db/database.db")
 
