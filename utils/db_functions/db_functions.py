@@ -148,12 +148,33 @@ class DataBase:
         column_name = "id_" + f"{table_name}"
 
         try:
-            if cur.execute(f"select id from {table_name} where {column_name} = '{id}'").fetchone()[0] != None:
+            if (cur.execute(f"SELECT id FROM {table_name} WHERE {column_name}='{id}'").fetchone()[0]) != 0:
                 return 1
         except:
             return 0
         self.con.commit()
         cur.close()
+
+
+    def update_employee_status(self, id_employee, status) -> bool:
+        """
+            param: table_name - table for which produced by search
+            param: id_employee - id for checking
+
+            example:
+                    db.update_employee_status(
+                        id_employee=2,
+                        status="болеет"
+                        )
+                        """
+
+        cur = self.con.cursor()
+        cur.execute(f"UPDATE employee SET status={status} WHERE id_employee={id_employee}")
+        self.con.commit()
+        cur.close()
+        return 1
+
+
 
 """
 db = DataBase(f"{PROJECT_PATH}/static/db/database.db")
