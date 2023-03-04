@@ -1,7 +1,7 @@
 import sqlite3
 
 
-conn = sqlite3.connect('../static/db/database.db')
+conn = sqlite3.connect('../static/db/db.db')
 cur = conn.cursor()
 
 #create tables
