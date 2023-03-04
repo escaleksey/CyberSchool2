@@ -65,6 +65,42 @@ class DataBase:
         finally:
             cur.close()
 
+    def get_all_values_employee(self) -> list:
+        cur = self.con.cursor()
+
+        try:
+            cur.execute(f"SELECT * FROM employee")
+            return list(cur.fetchall())
+        finally:
+            cur.close()
+
+    def get_all_values_equipment_received(self) -> list:
+        cur = self.con.cursor()
+
+        try:
+            cur.execute(f"SELECT * FROM equipment_received")
+            return list(cur.fetchall())
+        finally:
+            cur.close()
+
+    def get_all_values_org_tech(self) -> list:
+        cur = self.con.cursor()
+
+        try:
+            cur.execute(f"SELECT * FROM org_tech")
+            return list(cur.fetchall())
+        finally:
+            cur.close()
+
+    def get_all_values_bank(self) -> list:
+        cur = self.con.cursor()
+
+        try:
+            cur.execute(f"SELECT * FROM bank_licenses")
+            return list(cur.fetchall())
+        finally:
+            cur.close()
+
     def get_values_with_filter(self, table_name, **kwargs) -> list:
         """
         param: table_name - table for which produced by search
@@ -92,6 +128,7 @@ class DataBase:
             cur.close()
 
 
+"""
 db = DataBase(f"{PROJECT_PATH}/static/db/database.db")
 
 print(
@@ -103,3 +140,4 @@ print(
         amount_of_RAM=123,
         CD_rom=True)
 )
+"""

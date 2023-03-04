@@ -3,7 +3,7 @@ from flask import Flask, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from utils.helpers import apology, login_required
-from utils.filling_table.filling_pc_table import fill_pc_table
+from utils.filling_table.filling_table import FillTable
 
 # Configure application
 app = Flask(__name__)
@@ -19,6 +19,9 @@ Session(app)
 
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///static/db/database.db")
+
+# Create FillTable to filling tables
+fill = FillTable("static/db/database.db")
 
 
 @app.after_request
@@ -51,7 +54,7 @@ def index():
 @login_required
 def pc():
     """Show portfolio of stocks"""
-    values = (fill_pc_table("static/db/database.db"))
+    values = (fill.fill_pc_table())
     return render_template("tables.html", values=values)
 
 
@@ -59,7 +62,7 @@ def pc():
 @login_required
 def equipment_received():
     """Show portfolio of stocks"""
-    values = (fill_pc_table("static/db/database.db"))
+    values = (fill.fill_equipment_received_table())
     return render_template("tables.html", values=values)
 
 
@@ -67,7 +70,7 @@ def equipment_received():
 @login_required
 def office_equipment():
     """Show portfolio of stocks"""
-    values = (fill_pc_table("static/db/database.db"))
+    values = (fill.fill_office_equipment_table())
     return render_template("tables.html", values=values)
 
 
@@ -75,7 +78,7 @@ def office_equipment():
 @login_required
 def employees():
     """Show portfolio of stocks"""
-    values = (fill_pc_table("static/db/database.db"))
+    values = (fill.fill_employees_table())
     return render_template("tables.html", values=values)
 
 
@@ -83,7 +86,7 @@ def employees():
 @login_required
 def cards():
     """Show portfolio of stocks"""
-    values = (fill_pc_table("static/db/database.db"))
+    values = (fill.fill_cards_table())
     return render_template("tables.html", values=values)
 
 
@@ -91,14 +94,14 @@ def cards():
 @login_required
 def history():
     """Show portfolio of stocks"""
-    values = (fill_pc_table("static/db/database.db"))
+    values = (fill.fill_history_table())
     return render_template("tables.html", values=values)
 
 @app.route("/bank")
 @login_required
 def bank():
     """Show portfolio of stocks"""
-    values = (fill_pc_table("static/db/database.db"))
+    values = (fill.fill_bank_table())
     return render_template("tables.html", values=values)
 
 
