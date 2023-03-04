@@ -6,39 +6,63 @@
 
 {% block main %}
     <form action="/register" method="post">
-        <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="id_pc" name="id_pc" placeholder="ID ПК" type="text">
-            <a><i>все пк...</i></a>
+        <div class="item">
+            <input autocomplete="off" autofocus class="form-control " id="id_pc" name="id_pc" placeholder="ID ПК" type="text">
+            <a href=""><i>все пк...</i></a>
         </div>
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" id="structure" name="structure" placeholder="Структурное подразделение" type="text">
+        <div class="item">
+            <input class="form-control" id="structure" name="structure" placeholder="Структурное подразделение" type="text">
+            <a href=""></a>
         </div>
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" id="employee" name="employee" placeholder="ID сотрудника" type="text">
-            <a><i>все сотрудники...</i></a>
+        <div class="item">
+            <input class="form-control " id="employee" name="employee" placeholder="ID сотрудника" type="text">
+            <a href="/emplyees"><i>все сотрудники...</i></a>
         </div>
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" id="corpus" name="corpus" placeholder="Корпус" type="text">
+        <div class="item">
+            <input class="form-control " id="corpus" name="corpus" placeholder="Корпус" type="text">
+            <a href=""></a>
         </div>
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" id="room" name="room" placeholder="Комната" type="text">
+        <div class="item">
+            <input class="form-control" id="room" name="room" placeholder="Комната" type="text">
+            <a href=""></a>
         </div>
-        <div class="mb-3">
-            Тип оргтехнического оборудования
-            <div>
-                <input class="form-control mx-auto w-auto" id="type_office_equipment" name="monitor" type="flag">Монитор
-                <input class="form-control mx-auto w-auto" id="type_office_equipment" name="monitor" type="flag">Монитор
-                <input class="form-control mx-auto w-auto" id="type_office_equipment" name="monitor" type="flag">Монитор
-                <input class="form-control mx-auto w-auto" id="type_office_equipment" name="monitor" type="flag">Монитор
-                <input class="form-control mx-auto w-auto" id="type_office_equipment" name="monitor" type="flag">Монитор
-                <input class="form-control mx-auto w-auto" id="type_office_equipment" name="monitor" type="flag">Монитор
-                <input class="form-control mx-auto w-auto" id="type_office_equipment" name="monitor" type="flag">Монитор
+        <div class="item">
+            <p>Тип оргтехнического оборудования</p>
+            <div class="checkboxes" id="checkboxes">
+                {% for value in values["office_equipment"] %}
+                <div class="form-check" id="checkbox_container">
+                    <input class="form-check-input"  onclick="func()" type="checkbox" value="" id="{{loop.index}}_check">
+                    <label class="form-check-label" for="Monitor_check">
+                      {{value}}
+                    </label>
+                </div>
+
+                {% endfor %}
+                
+
             </div>
         </div>
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Confirmation" type="text">
+                {% for value in values["office_equipment"] %}
+                    <div class="item false" id="{{loop.index}}_model_container">
+                        <input class="form-control" type="text" value="" id="{{loop.index}}_model" placeholder="ID {{value}}">
+                        <a  href="/equipment_received"><i>все оборудование...</i></a>
+                    </div>
+                
+
+                {% endfor %}
+                
+
+            
+        
+        <div class="item">
+            <input class="form-control " id="confirmation" name="confirmation"  type="date">
+            <a href=""></a>
         </div>
       
         <button class="btn btn-primary" type="submit">Отправить</button>
     </form>
+
+    <script src="../static/js/title.js">
+        
+    </script>
 {% endblock %}
