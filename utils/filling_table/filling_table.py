@@ -32,7 +32,7 @@ class FillTable():
 
     def fill_office_equipment_table(self):
         data = self.db.get_all_values_org_tech()
-        titles = ['ID', 'Монитор', 'Принтер', 'МФУ', 'Сканер', 'Ксерокс', 'Плоттер', 'ИБП']
+        titles = ['ID', 'Тип оргтехники']
 
         values = [list(elem) for elem in data]
 
