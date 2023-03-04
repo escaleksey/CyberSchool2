@@ -30,11 +30,13 @@
 
                     </tr>
                 </thead>
-
+                {{ values['titles'] }}
                 <tbody class="tbody">
-                    <tr>
+                    <tr id="search_form">
                         {% for i in range(0, values['titles']|length) %}
-                            <td class="text-start"><input class="search" type="text"></td>
+                            <td class="text-start">
+                              <input class="search" name={{ values['titles'][i] | replace(" ", "_") }} type="text">
+                            </td>
                         {% endfor %}
                     </tr>
                {% for i in range(0, values['values']|length) %}
@@ -46,9 +48,8 @@
                     </tr>
                 {% endfor %}
                 </tbody>
-                
+
             </table>
-        </div>
         </div>
     </main>
 
