@@ -12,7 +12,7 @@ class DataBase:
     def __init__(self, database_name: str):
         self.search = TableSearch()
         self.db_name = database_name
-        self.con = sqlite3.connect(self.db_name)
+        self.con = sqlite3.connect(self.db_name, check_same_thread=False)
 
     def add_employee(self, dict_of_value: dict) -> bool:
         """
@@ -60,8 +60,10 @@ class DataBase:
         cur = self.con.cursor()
 
         try:
-            cur.execute(f"SELECT * FROM pk")
-            return list(cur.fetchall())
+            data = list(cur.execute(f"SELECT * FROM pk").fetchall())
+            print(data)
+            cur.close()
+            return data
         finally:
             cur.close()
 
@@ -96,7 +98,7 @@ class DataBase:
         cur = self.con.cursor()
 
         try:
-            cur.execute(f"SELECT * FROM bank_licenses")
+            cur.execute(f"SELECT * FROM bank_licences")
             return list(cur.fetchall())
         finally:
             cur.close()

@@ -4,6 +4,7 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from utils.helpers import apology, login_required
 from utils.filling_table.filling_table import FillTable
+from utils.db_functions.db_functions import DataBase
 
 # Configure application
 app = Flask(__name__)
@@ -19,9 +20,9 @@ Session(app)
 
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///static/db/database.db")
-
+db2 = DataBase("static/db/database.db")
 # Create FillTable to filling tables
-fill = FillTable("static/db/database.db")
+fill = FillTable(db2)
 
 
 @app.after_request
@@ -48,6 +49,14 @@ def index():
                            {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'}], 0, 0
 
     return render_template(f"index.html", stocks=stocks, cash=cash, summa=summa)
+
+
+@app.route("/title")
+@login_required
+def title():
+    """Show portfolio of stocks"""
+    values = (fill.fill_pc_table())
+    return render_template("title_form.html")
 
 
 @app.route("/pc")
@@ -179,10 +188,10 @@ def register():
 
         hashed_password = generate_password_hash(password)
         db.execute(f"""INSERT INTO users (username, hash) VALUES(?, ?)""", username, hashed_password)
-        session["user_id"] = username
-        return redirect('/')
-    else:
+
         return render_template(f"register.html")
+    else:
+        return render_template(f"/register.html")
 
 
 if __name__ == '__main__':

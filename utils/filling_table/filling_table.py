@@ -3,7 +3,7 @@ from utils.db_functions.db_functions import DataBase
 
 class FillTable():
     def __init__(self, db):
-        self.db = DataBase(db)
+        self.db = db
 
     def fill_pc_table(self):
         data = self.db.get_all_values_pk()
