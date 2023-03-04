@@ -141,7 +141,8 @@ def login():
             return apology("invalid username and/or password", 403)
 
         # Remember which user has logged in
-        session["user_id"] = rows[0]["id"]
+        print(rows)
+        session["user_id"] = rows[0]["id_users"]
 
         # Redirect user to home page
         return redirect("/")
