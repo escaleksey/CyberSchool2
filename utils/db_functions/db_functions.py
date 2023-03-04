@@ -1,15 +1,19 @@
 import sqlite3
 
+from utils.db_functions.search import TableSearch
+from __config__ import PROJECT_PATH
+
 
 class DataBase:
-    def __init__(self, database_name: str):
-        self.db_name = database_name
-        self.con = sqlite3.connect(self.db_name)
-
-
     """
     Класс для работы с базой данных
     """
+
+    def __init__(self, database_name: str):
+        self.search = TableSearch()
+        self.db_name = database_name
+        self.con = sqlite3.connect(self.db_name)
+
     def add_employee(self, dict_of_value: dict) -> bool:
         """
         :param dict_of_value
@@ -27,7 +31,6 @@ class DataBase:
         self.con.commit()
         cur.close()
         return 1
-
 
     def add_pk(self, dict_of_value: dict) -> bool:
         """
@@ -53,7 +56,6 @@ class DataBase:
         cur.close()
         return 1
 
-
     def get_all_values_pk(self) -> list:
         cur = self.con.cursor()
 
@@ -62,3 +64,42 @@ class DataBase:
             return list(cur.fetchall())
         finally:
             cur.close()
+
+    def get_values_with_filter(self, table_name, **kwargs) -> list:
+        """
+        param: table_name - table for which produced by search
+        param: **kwargs - dict of values for search
+
+        example:
+             db.get_values_with_filter(
+                'pk',
+                type_pk='qw',
+                class_pk='qw',
+                details='qw',
+                amount_of_RAM=123,
+                CD_rom=True
+        )
+        """
+
+        sql_request = self.search.create_table_search(table_name, **kwargs)
+        print(sql_request)
+        cur = self.con.cursor()
+
+        try:
+            cur.execute(sql_request)
+            return list(cur.fetchall())
+        finally:
+            cur.close()
+
+
+db = DataBase(f"{PROJECT_PATH}/static/db/database.db")
+
+print(
+    db.get_values_with_filter(
+        'pk',
+        type_pk='qw',
+        class_pk='qw',
+        details='qw',
+        amount_of_RAM=123,
+        CD_rom=True)
+)

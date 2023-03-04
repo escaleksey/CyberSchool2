@@ -1,10 +1,9 @@
 import sqlite3
 
-
 conn = sqlite3.connect('../static/db/db.db')
 cur = conn.cursor()
 
-#create tables
+# create tables
 cur.execute("""CREATE TABLE bank_licences (
     id_licences             INTEGER PRIMARY KEY AUTOINCREMENT
                                     UNIQUE
@@ -16,7 +15,6 @@ cur.execute("""CREATE TABLE bank_licences (
     note                    TEXT
 );
 """)
-
 
 cur.execute("""CREATE TABLE employee (
     employee_id INTEGER PRIMARY KEY AUTOINCREMENT
@@ -30,7 +28,6 @@ cur.execute("""CREATE TABLE employee (
     date        TEXT    NOT NULL
 );
 """)
-
 
 cur.execute("""CREATE TABLE equipment_received (
     equipment_id         INTEGER PRIMARY KEY AUTOINCREMENT
@@ -49,7 +46,6 @@ cur.execute("""CREATE TABLE equipment_received (
 );
 """)
 
-
 cur.execute("""CREATE TABLE org_tech (
     type_org TEXT,
     monitor  INT  UNIQUE,
@@ -61,7 +57,6 @@ cur.execute("""CREATE TABLE org_tech (
     ibp      INT  UNIQUE
 );
 """)
-
 
 cur.execute("""CREATE TABLE pk (
     id_pk                      INT     PRIMARY KEY,
@@ -89,6 +84,5 @@ cur.execute("""CREATE TABLE pk (
     num_of_rec                 TEXT
 );
 """)
-
 
 conn.commit()
