@@ -5,22 +5,23 @@
 {% endblock %}
 
 {% block main %}
+    <script src="./static/js/search.js"></script>
     <main class="container py-5 text-center">
         <div class="toolbar">
-            
-            <button  title="ПОИСК">
+
+            <button id="search_button" title="ПОИСК">
                 <div class="add_button">
                     <div class="text_button"><img src="../static/images/icons/search.png" alt=""></div>
                 </div>
             </button>
-            <button title="ДОБАВИТЬ ЭЛЕМЕНТ В ТАБЛИЦУ">
+            <button id="add_button" title="ДОБАВИТЬ ЭЛЕМЕНТ В ТАБЛИЦУ">
                 <div class="add_button">
                     <div class="text_button"><img src="../static/images/icons/plus.png" alt=""></div>
                 </div>
             </button>
         </div>
         <div class='scroll-table'>
-            <table class="table table-bordered">
+            <table id="table-view" class="table table-bordered">
                 <thead>
                     <tr>
                         <th class="text-center">ID</th>
