@@ -1,11 +1,12 @@
 import sqlite3
 
 
-class ErrorCertificate(Exception):
-    pass
-
-
 class DataBase:
+    def __init__(self, database_name: str):
+        self.db_name = database_name
+        self.con = sqlite3.connect(self.db_name)
+
+
     """
     Класс для работы с базой данных
     """
@@ -26,6 +27,7 @@ class DataBase:
         self.con.commit()
         cur.close()
         return 1
+
 
     def add_pk(self, dict_of_value: dict) -> bool:
         """
@@ -51,7 +53,8 @@ class DataBase:
         cur.close()
         return 1
 
-    def get_all_values_pk(self):
+
+    def get_all_values_pk(self) -> list:
         cur = self.con.cursor()
 
         try:
