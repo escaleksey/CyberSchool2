@@ -3,6 +3,7 @@ from flask import Flask, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from utils.helpers import apology, login_required
+from utils.filling_table.filling_pc_table import fill_pc_table
 
 # Configure application
 app = Flask(__name__)
@@ -50,11 +51,55 @@ def index():
 @login_required
 def pc():
     """Show portfolio of stocks"""
-    stocks, cash, summa = [{"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'}
-                           for _ in range(10)
-                           ], 0, 0
+    values = (fill_pc_table("static/db/database.db"))
+    return render_template("tables.html", values=values)
 
-    return render_template("pc.html", stocks=stocks, cash=cash, summa=summa)
+
+@app.route("/equipment_received")
+@login_required
+def equipment_received():
+    """Show portfolio of stocks"""
+    values = (fill_pc_table("static/db/database.db"))
+    return render_template("tables.html", values=values)
+
+
+@app.route("/office_equipment")
+@login_required
+def office_equipment():
+    """Show portfolio of stocks"""
+    values = (fill_pc_table("static/db/database.db"))
+    return render_template("tables.html", values=values)
+
+
+@app.route("/employees")
+@login_required
+def employees():
+    """Show portfolio of stocks"""
+    values = (fill_pc_table("static/db/database.db"))
+    return render_template("tables.html", values=values)
+
+
+@app.route("/cards")
+@login_required
+def cards():
+    """Show portfolio of stocks"""
+    values = (fill_pc_table("static/db/database.db"))
+    return render_template("tables.html", values=values)
+
+
+@app.route("/history")
+@login_required
+def history():
+    """Show portfolio of stocks"""
+    values = (fill_pc_table("static/db/database.db"))
+    return render_template("tables.html", values=values)
+
+@app.route("/bank")
+@login_required
+def bank():
+    """Show portfolio of stocks"""
+    values = (fill_pc_table("static/db/database.db"))
+    return render_template("tables.html", values=values)
 
 
 @app.route("/login", methods=["GET", "POST"])
