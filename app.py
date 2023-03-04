@@ -34,9 +34,76 @@ def after_request(response):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    stocks, cash, summa = [], 0, 0
+    stocks, cash, summa = [{"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'}], 0, 0
+
+
 
     return render_template(f"index.html", stocks=stocks, cash=cash, summa=summa)
+
+
+@app.route("/pc")
+@login_required
+def pc():
+    """Show portfolio of stocks"""
+    stocks, cash, summa = [{"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'}
+                           ], 0, 0
+
+    return render_template(f"pc.html", stocks=stocks, cash=cash, summa=summa)
+
 
 
 @app.route("/login", methods=["GET", "POST"])
