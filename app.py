@@ -1,5 +1,8 @@
+import json
+from urllib.parse import unquote
+
 from cs50 import SQL
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, jsonify, make_response, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from utils.helpers import apology, login_required
@@ -25,6 +28,12 @@ db2 = DataBase("static/db/database.db")
 fill = FillTable(db2)
 
 
+def json_decoder(js):
+    return {
+        a: b for a, b in filter(lambda x: x[1], js.items())
+    }
+
+
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -39,13 +48,13 @@ def after_request(response):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    stocks, cash, summa = [{"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price":'23', "total": '23'},
+    stocks, cash, summa = [{"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
+                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
                            {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'}], 0, 0
 
     return render_template(f"index.html", stocks=stocks, cash=cash, summa=summa)
@@ -86,10 +95,19 @@ def title():
     return render_template("title_form.html", values=values)
 
 
-@app.route("/pc")
+@app.route("/pc", methods=["GET", "POST"])
 @login_required
 def pc():
     """Show portfolio of stocks"""
+    if request.method == 'POST':
+        json_data = json_decoder(request.get_json())
+        if not json_data:
+            data = (fill.fill_pc_table())['values']
+        else:
+            data = fill.db.get_values_with_filter("pk", **json_data)
+
+        return make_response(jsonify(data), 200)
+
     values = (fill.fill_pc_table())
     return render_template("tables.html", values=values)
 
@@ -132,6 +150,7 @@ def history():
     """Show portfolio of stocks"""
     values = (fill.fill_history_table())
     return render_template("tables.html", values=values)
+
 
 @app.route("/bank")
 @login_required

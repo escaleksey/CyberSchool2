@@ -9,11 +9,13 @@
     <main class="container py-5 text-center">
         <div class="toolbar">
 
-            <button id="search_button" title="ПОИСК">
+            <button id="search_button" title="ПОИСК" type="submit">
                 <div class="add_button">
-                    <div class="text_button"><img src="../static/images/icons/search.png" alt=""></div>
+                    <div class="text_button">
+                      <img src="../static/images/icons/search.png" alt=""></div>
                 </div>
             </button>
+
             <button id="add_button" title="ДОБАВИТЬ ЭЛЕМЕНТ В ТАБЛИЦУ">
                 <div class="add_button">
                     <div class="text_button"><img src="../static/images/icons/plus.png" alt=""></div>
@@ -31,15 +33,17 @@
 
                     </tr>
                 </thead>
-
-                <tbody class="tbody">
-                    <tr>
+                <tbody class="tbody" id="tbody">
+                    <tr id="search_form">
                             <td class="text-center"></td>
                         {% for i in range(0, values['titles']|length) %}
-                            <td class="text-start"><input class="search" type="text"></td>
+                            <td class="text-start">
+                              <input class="search" name={{ values['titles'][i] | replace(" ", "_") }} type="text">
+                            </td>
                         {% endfor %}
                     </tr>
                {% for i in range(0, values['values']|length) %}
+                    <tr id="row">
                     <tr>
                         <td class="text-center"><a href="#" id="edit_{{i}}"><img class="icon_reset" src="../static/images/icons/pencil.png" alt=""></a></td>
                         {% for value in values['values'][i] %}
@@ -49,7 +53,7 @@
                     </tr>
                 {% endfor %}
                 </tbody>
-                
+
             </table>
         </div>
         </div>
