@@ -6,10 +6,10 @@ class DataBase:
         self.db_name = database_name
         self.con = sqlite3.connect(self.db_name)
 
-
     """
     Класс для работы с базой данных
     """
+
     def add_employee(self, dict_of_value: dict) -> bool:
         """
         :param dict_of_value
@@ -27,7 +27,6 @@ class DataBase:
         self.con.commit()
         cur.close()
         return 1
-
 
     def add_pk(self, dict_of_value: dict) -> bool:
         """
@@ -53,12 +52,47 @@ class DataBase:
         cur.close()
         return 1
 
-
     def get_all_values_pk(self) -> list:
         cur = self.con.cursor()
 
         try:
             cur.execute(f"SELECT * FROM pk")
+            return list(cur.fetchall())
+        finally:
+            cur.close()
+
+    def get_all_values_employee(self) -> list:
+        cur = self.con.cursor()
+
+        try:
+            cur.execute(f"SELECT * FROM employee")
+            return list(cur.fetchall())
+        finally:
+            cur.close()
+
+    def get_all_values_equipment_received(self) -> list:
+        cur = self.con.cursor()
+
+        try:
+            cur.execute(f"SELECT * FROM equipment_received")
+            return list(cur.fetchall())
+        finally:
+            cur.close()
+
+    def get_all_values_org_tech(self) -> list:
+        cur = self.con.cursor()
+
+        try:
+            cur.execute(f"SELECT * FROM org_tech")
+            return list(cur.fetchall())
+        finally:
+            cur.close()
+
+    def get_all_values_bank(self) -> list:
+        cur = self.con.cursor()
+
+        try:
+            cur.execute(f"SELECT * FROM bank_licenses")
             return list(cur.fetchall())
         finally:
             cur.close()
