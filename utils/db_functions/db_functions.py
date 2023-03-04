@@ -18,7 +18,7 @@ class DataBase:
         """
         :param dict_of_value
         :return: None
-        добавляет сертификат в бд
+        добавляет работника в бд
         """
         list_of_value = list(dict_of_value.values())
 
@@ -32,11 +32,29 @@ class DataBase:
         cur.close()
         return 1
 
+    def add_card(self, dict_of_value: dict) -> bool:
+        """
+        :param dict_of_value
+        :return: None
+        добавляет карту в бд
+        """
+        list_of_value = list(dict_of_value.values())
+
+        cur = self.con.cursor()
+        request = f'''INSERT OR IGNORE INTO employee(id_card, id_pk, structure, corpus, room_number, id_org_tech, data)
+         VALUES({list_of_value[0]}, {list_of_value[1]}, "{list_of_value[2]}", {list_of_value[3]},
+          "{list_of_value[4]}", "{list_of_value[5]}", "{list_of_value[6]}", "{list_of_value[7]}");'''
+
+        cur.execute(request)
+        self.con.commit()
+        cur.close()
+        return 1
+
     def add_pk(self, dict_of_value: dict) -> bool:
         """
         :param dict_of_value
         :return: None
-        добавляет сертификат в бд
+        добавляет пк в бд
         """
         list_of_value = list(dict_of_value.values())
 
