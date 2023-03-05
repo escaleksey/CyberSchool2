@@ -48,16 +48,9 @@ def after_request(response):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    stocks, cash, summa = [{"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'}], 0, 0
+    values = fill.fill_cards_table()
 
-    return render_template(f"index.html", stocks=stocks, cash=cash, summa=summa)
+    return render_template(f"index.html", values=values)
 
 
 @app.route("/title", methods=["GET", "POST"])
@@ -183,12 +176,6 @@ def employees():
     return render_template("tables.html", values=values)
 
 
-@app.route("/cards")
-@login_required
-def cards():
-    """Show portfolio of stocks"""
-    values = (fill.fill_cards_table())
-    return render_template("tables.html", values=values)
 
 
 @app.route("/history")
