@@ -67,7 +67,7 @@ def title():
     values = (fill.fill_title_table())
     count_office_equipment = len(values["office_equipment"])
     if request.method == "POST":
-        print(request.form)
+
         send_to_add_card = {}
         models = ''
         for e, v in request.form.items():
@@ -121,7 +121,7 @@ def equipment_received():
         json_data = json_decoder(request.get_json())
 
         if not json_data:
-            data = (fill.fill_pc_table())['values']
+            data = (fill.fill_equipment_received_table())['values']
         else:
             data = fill.db.get_values_with_filter("equipment_received", **json_data)
 
@@ -140,7 +140,7 @@ def office_equipment():
         json_data = json_decoder(request.get_json())
 
         if not json_data:
-            data = (fill.fill_pc_table())['values']
+            data = (fill.fill_office_equipment_table())['values']
         else:
             data = fill.db.get_values_with_filter("org_tech", **json_data)
 
@@ -158,7 +158,7 @@ def employees():
         json_data = json_decoder(request.get_json())
 
         if not json_data:
-            data = (fill.fill_pc_table())['values']
+            data = (fill.fill_employees_table())['values']
         else:
             data = fill.db.get_values_with_filter("pk", **json_data)
 
@@ -192,7 +192,7 @@ def bank():
         json_data = json_decoder(request.get_json())
 
         if not json_data:
-            data = (fill.fill_pc_table())['values']
+            data = (fill.fill_bank_table())['values']
         else:
             data = fill.db.get_values_with_filter("bank_licences", **json_data)
 
@@ -229,7 +229,6 @@ def login():
             return apology("invalid username and/or password", 403)
 
         # Remember which user has logged in
-        print(rows)
         session["user_id"] = rows[0]["id_users"]
 
         # Redirect user to home page
