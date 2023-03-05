@@ -133,7 +133,7 @@ thead {
     display: none;
 }
 
-.custom-file-input {
+/* .custom-file-input {
   color: transparent;
 }
 .custom-file-input::-webkit-file-upload-button {
@@ -164,4 +164,4 @@ thead {
 }
 .custom-file-input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
-}
+} */
