@@ -29,12 +29,13 @@ nav .navbar-brand .green
 .toolbar {
     display: flex;
     margin-bottom: 60px;
+    
 }
 
 .toolbar button {
-    padding: 0;
     border-radius: 50%;
     margin: 0 5px;
+    border: black 1px solid;
 }
 
 .text_button {
@@ -54,6 +55,18 @@ nav .navbar-brand .green
     width: 30px;
     height: 30px;
 
+}
+
+.csv_button {
+    margin-left: 10px;
+    border-radius: 5px;
+    border: black 1px solid;
+    padding: 9px;
+}
+
+.csv_button button {
+    border-radius: 5px;
+    padding: 3px;
 }
 
 
