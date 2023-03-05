@@ -49,7 +49,7 @@ class FillTable():
         return result
 
     def fill_cards_table(self):
-        data = self.db.get_all_values_employee()
+        data = self.db.get_all_values_card()
         titles = ['ID', 'ID ПК', 'ID Сотрудника', 'Структурное подразделение', 'Корпус', 'Номер кабинета', 'Орг техника']
 
         values = [list(elem) for elem in data]
