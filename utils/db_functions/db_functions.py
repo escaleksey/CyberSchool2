@@ -114,6 +114,15 @@ class DataBase:
         cur.close()
         return 1
 
+    def get_all_values_card(self) -> list:
+        cur = self.con.cursor()
+
+        try:
+            cur.execute(f"SELECT * FROM card")
+            return list(cur.fetchall())
+        finally:
+            cur.close()
+
     def get_all_values_pk(self) -> list:
         cur = self.con.cursor()
 
