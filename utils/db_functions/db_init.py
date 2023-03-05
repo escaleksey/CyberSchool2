@@ -1,6 +1,8 @@
 import sqlite3
 
-conn = sqlite3.connect('../static/db/db.db')
+from __config__ import PROJECT_PATH
+
+conn = sqlite3.connect(f'{PROJECT_PATH}/static/db/database.db')
 cur = conn.cursor()
 
 # create tables
@@ -46,20 +48,26 @@ cur.execute("""CREATE TABLE equipment_received (
 );
 """)
 
+cur.execute("""CREATE TABLE card (
+    id_card     INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_pk       INT,
+    id_employee INT,
+    structure   TEXT,
+    corpus      TEXT,
+    room_number TEXT,
+    id_org_tech TEXT,
+    data        TEXT
+);
+""")
+
 cur.execute("""CREATE TABLE org_tech (
-    type_org TEXT,
-    monitor  INT  UNIQUE, 
-    printer  INT  UNIQUE, 
-    mfu      INT  UNIQUE,
-    skaner   INT  UNIQUE,
-    xerox    INT  UNIQUE,
-    plotter  INT  UNIQUE, 
-    ibp      INT  UNIQUE 
+    id_org_tech                 INTEGER PRIMARY KEY AUTOINCREMENT,
+    type_org TEXT 
 );
 """)
 
 cur.execute("""CREATE TABLE pk (
-    id_pk                      INT     PRIMARY KEY,
+    id_pk                      INTEGER PRIMARY KEY AUTOINCREMENT,
     type_pk                    TEXT,
     class_pk                   TEXT,
     details                    TEXT,
@@ -82,6 +90,15 @@ cur.execute("""CREATE TABLE pk (
     external_inet_availability BOOLEAN DEFAULT (False),
     external_IP_adress         INT     DEFAULT None,
     num_of_rec                 TEXT
+);
+""")
+
+cur.execute("""CREATE TABLE users (
+    id_users INTEGER PRIMARY KEY AUTOINCREMENT
+                     UNIQUE
+                     NOT NULL,
+    username         NOT NULL,
+    hash     STRING  NOT NULL
 );
 """)
 

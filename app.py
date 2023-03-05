@@ -48,16 +48,9 @@ def after_request(response):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    stocks, cash, summa = [{"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'},
-                           {"symbol": '2', "name": '123', "count": '1', "price": '23', "total": '23'}], 0, 0
+    values = fill.fill_cards_table()
 
-    return render_template(f"index.html", stocks=stocks, cash=cash, summa=summa)
+    return render_template(f"index.html", values=values)
 
 
 @app.route("/title", methods=["GET", "POST"])
@@ -154,7 +147,7 @@ def pc():
     return render_template("tables.html", values=values)
 
 
-@app.route("/equipment_received")
+@app.route("/equipment_received", methods=["GET", "POST"])
 @login_required
 def equipment_received():
     """Show portfolio of stocks"""
@@ -172,14 +165,14 @@ def equipment_received():
     return render_template("tables.html", values=values)
 
 
-@app.route("/office_equipment")
+@app.route("/office_equipment", methods=["GET", "POST"])
 @login_required
 def office_equipment():
     """Show portfolio of stocks"""
 
     if request.method == 'POST':
         json_data = json_decoder(request.get_json())
-
+        print(json_data, 111)
         if not json_data:
             data = (fill.fill_office_equipment_table())['values']
         else:
@@ -191,7 +184,7 @@ def office_equipment():
     return render_template("tables.html", values=values)
 
 
-@app.route("/employees")
+@app.route("/employees", methods=["GET", "POST"])
 @login_required
 def employees():
     """Show portfolio of stocks"""
@@ -201,7 +194,7 @@ def employees():
         if not json_data:
             data = (fill.fill_employees_table())['values']
         else:
-            data = fill.db.get_values_with_filter("pk", **json_data)
+            data = fill.db.get_values_with_filter("employee", **json_data)
 
         return make_response(jsonify(data), 200)
 
@@ -209,12 +202,6 @@ def employees():
     return render_template("tables.html", values=values)
 
 
-@app.route("/cards")
-@login_required
-def cards():
-    """Show portfolio of stocks"""
-    values = (fill.fill_cards_table())
-    return render_template("tables.html", values=values)
 
 
 @app.route("/history")
@@ -225,7 +212,7 @@ def history():
     return render_template("tables.html", values=values)
 
 
-@app.route("/bank")
+@app.route("/bank", methods=["GET", "POST"])
 @login_required
 def bank():
     """Show portfolio of stocks"""

@@ -41,16 +41,20 @@ class FillTable():
 
     def fill_employees_table(self):
         data = self.db.get_all_values_employee()
-        titles = ['ID', 'ФИО', 'ID ПК', 'Полномочия', 'Дата', 'Состояние']
+        titles = ['ID', 'ФИО', 'Должность', 'ID ПК', 'Полномочия', 'Состояние', 'Дата']
 
         values = [list(elem) for elem in data]
 
         result = {'name': 'СОТРУДНИКИ', 'titles': titles, 'values': values}
         return result
 
-
     def fill_cards_table(self):
-        result = {'name': 'КАРТОЧКИ', 'titles': [], 'values': [[]]}
+        data = self.db.get_all_values_card()
+        titles = ['ID', 'ID ПК', 'ID Сотрудника', 'Структурное подразделение', 'Корпус', 'Номер кабинета', 'Орг техника']
+
+        values = [list(elem) for elem in data]
+
+        result = {'name': 'КАРТОЧКИ', 'titles': titles, 'values': values}
         return result
 
     def fill_history_table(self):
@@ -65,7 +69,6 @@ class FillTable():
 
         result = {'name': 'ПК', 'titles': titles, 'values': values}
         return result
-
 
     def fill_title_table(self):
         data = self.db.get_all_values_org_tech()

@@ -32,7 +32,7 @@
                 {% for value in values["office_equipment"] %}
                 <div class="form-check" id="checkbox_container">
                     <input class="form-check-input"  onclick="func()" type="checkbox" value="" id="{{loop.index}}_check">
-                    <label class="form-check-label" for="Monitor_check">
+                    <label class="form-check-label" for="{{loop.index}}_check">
                       {{value}}
                     </label>
                 </div>
