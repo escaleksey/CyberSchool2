@@ -64,19 +64,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+    function resetTable(data) {
+
+        let elements = document.querySelectorAll('#row');
+        for (let elem of elements) {
+            elem.parentNode.removeChild(elem);
+        }
+
+        let tbody = document.getElementById("tbody")
+
+        for (let elem of data) {
+
+            let tr = document.createElement('tr');
+            tr.setAttribute('id', 'row');
+
+            let td = document.createElement('td');
+            td.setAttribute('class', 'text-center');
+            tr.appendChild(td)
+            
+            for (let elemItem of elem) {
+                let td = document.createElement('td');
+                td.innerText = elemItem;
+                tr.appendChild(td)
+            }
+
+            console.log(tr)
+            tbody.appendChild(tr)
+        }
+    }
+
+
     let window_url = window.location.href.split("/")
     let type = window_url[window_url.length - 1]
 
-    let search_button = document.querySelector("#search_button");
-
-    search_button.onclick = function () {
+    document.querySelector("#search_button").onclick = function () {
         let jsonData = {}
         let elements = document.querySelectorAll('.search');
         for (let elem of elements) {
             jsonData[convector[type][elem.name]] = encodeURIComponent(elem.value)
         }
         console.log(jsonData)
-        fetch("/pc",
+        fetch(
+            "/pc",
             {
                 headers: {
                     'Accept': 'application/json',
@@ -91,33 +120,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log(data); //3
             })
             .catch(function (res) {
-                console.log(res)
-            })
-
-        function resetTable(data) {
-            console.log(data)
-
-            let elements = document.querySelectorAll('#row');
-            for (let elem of elements) {
-                elem.parentNode.removeChild(elem);
-            }
-
-            let tbody = document.getElementById("tbody")
-            console.log(tbody)
-            for (let elem of data) {
-
-                let tr = document.createElement('tr');
-                tr.setAttribute('id','row');
-
-                for (let elemItem of elem) {
-                    let td = document.createElement('td');
-                    td.innerText = elemItem;
-                    tr.appendChild(td)
+                    console.log(res)
                 }
-
-                console.log(tr)
-                tbody.appendChild(tr)
-            }
-        }
+            )
     }
+
+
 });

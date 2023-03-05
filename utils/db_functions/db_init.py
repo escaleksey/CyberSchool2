@@ -48,13 +48,13 @@ cur.execute("""CREATE TABLE equipment_received (
 
 cur.execute("""CREATE TABLE org_tech (
     type_org TEXT,
-    monitor  INT  UNIQUE,
-    printer  INT  UNIQUE,
+    monitor  INT  UNIQUE, 
+    printer  INT  UNIQUE, 
     mfu      INT  UNIQUE,
     skaner   INT  UNIQUE,
     xerox    INT  UNIQUE,
-    plotter  INT  UNIQUE,
-    ibp      INT  UNIQUE
+    plotter  INT  UNIQUE, 
+    ibp      INT  UNIQUE 
 );
 """)
 

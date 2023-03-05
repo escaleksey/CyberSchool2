@@ -79,7 +79,6 @@ class DataBase:
 
         try:
             data = list(cur.execute(f"SELECT * FROM pk").fetchall())
-            print(data)
             cur.close()
             return data
         finally:
@@ -138,7 +137,6 @@ class DataBase:
         """
 
         sql_request = self.search.create_table_search(table_name, **kwargs)
-        print(sql_request)
         cur = self.con.cursor()
 
         try:
@@ -160,7 +158,6 @@ class DataBase:
         finally:
             cur.close()
 
-
     def check_exist(self, table_name, id) -> bool:
         """
                 param: table_name - table for which produced by search
@@ -174,7 +171,6 @@ class DataBase:
                 """
 
         sql_request = self.search.create_table_search(table_name, id)
-        print(sql_request)
         cur = self.con.cursor()
         column_name = "id_" + f"{table_name}"
 
@@ -185,7 +181,6 @@ class DataBase:
             return 0
         self.con.commit()
         cur.close()
-
 
     def update_employee_status(self, id_employee, status) -> bool:
         """
@@ -204,7 +199,6 @@ class DataBase:
         self.con.commit()
         cur.close()
         return 1
-
 
 
 """

@@ -5,7 +5,7 @@ from cs50 import SQL
 from flask import Flask, jsonify, make_response, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-from utils.helpers import apology, login_required
+from utils.helpers import *
 from utils.filling_table.filling_table import FillTable
 from utils.db_functions.db_functions import DataBase
 
@@ -67,7 +67,7 @@ def title():
     values = (fill.fill_title_table())
     count_office_equipment = len(values["office_equipment"])
     if request.method == "POST":
-        print(request.form)
+
         send_to_add_card = {}
         models = ''
         for e, v in request.form.items():
@@ -95,12 +95,28 @@ def title():
     return render_template("title_form.html", values=values)
 
 
+@app.route("/add", methods=["GET", "POST"])
+@login_required
+def add():
+    type = request.args.get("type")
+    if not type:
+        return apology("Page not Found")
+
+    if request.method == "POST":
+        pass
+    else:
+        table_data = get_table_data(fill, type)
+        print(table_data)
+        return render_template("adding.html")
+
+
 @app.route("/pc", methods=["GET", "POST"])
 @login_required
 def pc():
     """Show portfolio of stocks"""
     if request.method == 'POST':
         json_data = json_decoder(request.get_json())
+
         if not json_data:
             data = (fill.fill_pc_table())['values']
         else:
@@ -116,6 +132,16 @@ def pc():
 @login_required
 def equipment_received():
     """Show portfolio of stocks"""
+    if request.method == 'POST':
+        json_data = json_decoder(request.get_json())
+
+        if not json_data:
+            data = (fill.fill_equipment_received_table())['values']
+        else:
+            data = fill.db.get_values_with_filter("equipment_received", **json_data)
+
+        return make_response(jsonify(data), 200)
+
     values = (fill.fill_equipment_received_table())
     return render_template("tables.html", values=values)
 
@@ -124,6 +150,17 @@ def equipment_received():
 @login_required
 def office_equipment():
     """Show portfolio of stocks"""
+
+    if request.method == 'POST':
+        json_data = json_decoder(request.get_json())
+
+        if not json_data:
+            data = (fill.fill_office_equipment_table())['values']
+        else:
+            data = fill.db.get_values_with_filter("org_tech", **json_data)
+
+        return make_response(jsonify(data), 200)
+
     values = (fill.fill_office_equipment_table())
     return render_template("tables.html", values=values)
 
@@ -132,6 +169,16 @@ def office_equipment():
 @login_required
 def employees():
     """Show portfolio of stocks"""
+    if request.method == 'POST':
+        json_data = json_decoder(request.get_json())
+
+        if not json_data:
+            data = (fill.fill_employees_table())['values']
+        else:
+            data = fill.db.get_values_with_filter("pk", **json_data)
+
+        return make_response(jsonify(data), 200)
+
     values = (fill.fill_employees_table())
     return render_template("tables.html", values=values)
 
@@ -156,6 +203,16 @@ def history():
 @login_required
 def bank():
     """Show portfolio of stocks"""
+    if request.method == 'POST':
+        json_data = json_decoder(request.get_json())
+
+        if not json_data:
+            data = (fill.fill_bank_table())['values']
+        else:
+            data = fill.db.get_values_with_filter("bank_licences", **json_data)
+
+        return make_response(jsonify(data), 200)
+
     values = (fill.fill_bank_table())
     return render_template("tables.html", values=values)
 
@@ -187,7 +244,6 @@ def login():
             return apology("invalid username and/or password", 403)
 
         # Remember which user has logged in
-        print(rows)
         session["user_id"] = rows[0]["id_users"]
 
         # Redirect user to home page
