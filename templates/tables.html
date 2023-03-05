@@ -1,62 +1,65 @@
 {% extends "layout.html" %}
 
 {% block title %}
-  {{values['name']}}
+  {{ values['name'] }}
 {% endblock %}
 
 {% block main %}
-    <script src="./static/js/search.js"></script>
-    <main class="container py-5 text-center">
-        <div class="toolbar">
+  <script src="./static/js/search.js"></script>
+  <main class="container py-5 text-center">
+    <div class="toolbar">
 
-            <button id="search_button" title="ПОИСК" type="submit">
-                <div class="add_button">
-                    <div class="text_button">
-                      <img src="../static/images/icons/search.png" alt=""></div>
-                </div>
-            </button>
-
-            <button id="add_button" title="ДОБАВИТЬ ЭЛЕМЕНТ В ТАБЛИЦУ">
-                <div class="add_button">
-                    <div class="text_button"><img src="../static/images/icons/plus.png" alt=""></div>
-                </div>
-            </button>
+      <button id="search_button" title="ПОИСК" type="submit">
+        <div class="add_button">
+          <div class="text_button">
+            <img src="../static/images/icons/search.png" alt=""></div>
         </div>
-        <div class='scroll-table'>
-            <table id="table-view" class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th class="text-center"></th>
-                        {% for title in values['titles'] %}
-                            <th class="text-center"><div>{{title}}</div></th>
-                        {% endfor %}
+      </button>
 
-                    </tr>
-                </thead>
-                <tbody class="tbody" id="tbody">
-                    <tr id="search_form">
-                            <td class="text-center"></td>
-                        {% for i in range(0, values['titles']|length) %}
-                            <td class="text-start">
-                              <input class="search" name={{ values['titles'][i] | replace(" ", "_") }} type="text">
-                            </td>
-                        {% endfor %}
-                    </tr>
-               {% for i in range(0, values['values']|length) %}
-                    <tr id="row">
-                    <tr>
-                        <td class="text-center"><a href="#" id="edit_{{i}}"><img class="icon_reset" src="../static/images/icons/pencil.png" alt=""></a></td>
-                        {% for value in values['values'][i] %}
-                            <td class="text-center">{{value}}</td>
-                        {% endfor %}
-
-                    </tr>
-                {% endfor %}
-                </tbody>
-
-            </table>
+      <button id="add_button" title="ДОБАВИТЬ ЭЛЕМЕНТ В ТАБЛИЦУ">
+        <div class="add_button">
+          <div class="text_button"><img src="../static/images/icons/plus.png" alt=""></div>
         </div>
-        </div>
-    </main>
+      </button>
+    </div>
+    <div class='scroll-table'>
+      <table id="table-view" class="table table-bordered">
+        <thead>
+        <tr>
+          <th class="text-center"></th>
+          {% for title in values['titles'] %}
+            <th class="text-center">
+              <div>{{ title }}</div>
+            </th>
+          {% endfor %}
+
+        </tr>
+        </thead>
+        <tbody class="tbody" id="tbody">
+        <tr id="search_form">
+          <td class="text-center"></td>
+          {% for i in range(0, values['titles']|length) %}
+            <td class="text-start">
+              <input class="search" name={{ values['titles'][i] | replace(" ", "_") }} type="text">
+            </td>
+          {% endfor %}
+        </tr>
+        {% for i in range(0, values['values']|length) %}
+          <tr id="row">
+
+            <td class="text-center"><a href="#" id="edit_{{ i }}">
+              <img class="icon_reset" src="../static/images/icons/pencil.png" alt=""></a></td>
+            {% for value in values['values'][i] %}
+              <td class="text-center">{{ value }}</td>
+            {% endfor %}
+
+          </tr>
+        {% endfor %}
+        </tbody>
+
+      </table>
+    </div>
+    </div>
+  </main>
 
 {% endblock %}
