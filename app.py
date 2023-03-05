@@ -134,6 +134,7 @@ def add():
 def pc():
     """Show portfolio of stocks"""
     if request.method == 'POST':
+
         json_data = json_decoder(request.get_json())
 
         if not json_data:
