@@ -1,7 +1,4 @@
-import convector from "./consts";
-
 function resetTable(data) {
-    console.log(data)
 
     let elements = document.querySelectorAll('#row');
     for (let elem of elements) {
@@ -9,7 +6,7 @@ function resetTable(data) {
     }
 
     let tbody = document.getElementById("tbody")
-    console.log(tbody)
+
     for (let elem of data) {
 
         let tr = document.createElement('tr');
