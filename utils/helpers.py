@@ -4,6 +4,7 @@ import urllib.parse
 
 from flask import redirect, render_template, request, session
 from functools import wraps
+from utils.filling_table.filling_table import FillTable
 
 
 def apology(message, code=400):
@@ -33,3 +34,15 @@ def login_required(f):
             return redirect("/login")
         return f(*args, **kwargs)
     return decorated_function
+
+
+def get_table_data(fill: FillTable, type: str):
+    tables = {
+        'pc': fill.fill_pc_table,
+        'office_equipment': fill.fill_office_equipment_table,
+        'employees': fill.fill_employees_table,
+        'bank': fill.fill_bank_table,
+        'equipment_received': fill.fill_equipment_received_table,
+    }
+
+    return tables[type]()

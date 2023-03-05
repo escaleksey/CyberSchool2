@@ -5,7 +5,7 @@ from cs50 import SQL
 from flask import Flask, jsonify, make_response, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-from utils.helpers import apology, login_required
+from utils.helpers import *
 from utils.filling_table.filling_table import FillTable
 from utils.db_functions.db_functions import DataBase
 
@@ -93,6 +93,21 @@ def title():
             return apology("Проверьте данные id ПК", 403)
 
     return render_template("title_form.html", values=values)
+
+
+@app.route("/add", methods=["GET", "POST"])
+@login_required
+def add():
+    type = request.args.get("type")
+    if not type:
+        return apology("Page not Found")
+
+    if request.method == "POST":
+        pass
+    else:
+        table_data = get_table_data(fill, type)
+        print(table_data)
+        return render_template("adding.html")
 
 
 @app.route("/pc", methods=["GET", "POST"])
