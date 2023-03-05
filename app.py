@@ -101,6 +101,7 @@ def pc():
     """Show portfolio of stocks"""
     if request.method == 'POST':
         json_data = json_decoder(request.get_json())
+
         if not json_data:
             data = (fill.fill_pc_table())['values']
         else:
@@ -116,6 +117,16 @@ def pc():
 @login_required
 def equipment_received():
     """Show portfolio of stocks"""
+    if request.method == 'POST':
+        json_data = json_decoder(request.get_json())
+
+        if not json_data:
+            data = (fill.fill_pc_table())['values']
+        else:
+            data = fill.db.get_values_with_filter("equipment_received", **json_data)
+
+        return make_response(jsonify(data), 200)
+
     values = (fill.fill_equipment_received_table())
     return render_template("tables.html", values=values)
 
@@ -124,6 +135,17 @@ def equipment_received():
 @login_required
 def office_equipment():
     """Show portfolio of stocks"""
+
+    if request.method == 'POST':
+        json_data = json_decoder(request.get_json())
+
+        if not json_data:
+            data = (fill.fill_pc_table())['values']
+        else:
+            data = fill.db.get_values_with_filter("org_tech", **json_data)
+
+        return make_response(jsonify(data), 200)
+
     values = (fill.fill_office_equipment_table())
     return render_template("tables.html", values=values)
 
@@ -132,6 +154,16 @@ def office_equipment():
 @login_required
 def employees():
     """Show portfolio of stocks"""
+    if request.method == 'POST':
+        json_data = json_decoder(request.get_json())
+
+        if not json_data:
+            data = (fill.fill_pc_table())['values']
+        else:
+            data = fill.db.get_values_with_filter("pk", **json_data)
+
+        return make_response(jsonify(data), 200)
+
     values = (fill.fill_employees_table())
     return render_template("tables.html", values=values)
 
@@ -156,6 +188,16 @@ def history():
 @login_required
 def bank():
     """Show portfolio of stocks"""
+    if request.method == 'POST':
+        json_data = json_decoder(request.get_json())
+
+        if not json_data:
+            data = (fill.fill_pc_table())['values']
+        else:
+            data = fill.db.get_values_with_filter("bank_licences", **json_data)
+
+        return make_response(jsonify(data), 200)
+
     values = (fill.fill_bank_table())
     return render_template("tables.html", values=values)
 
