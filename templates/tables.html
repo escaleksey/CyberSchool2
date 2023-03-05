@@ -7,7 +7,7 @@
 {% block main %}
 <script src="./static/js/search.js"></script>
 <script src="./static/js/adding.js"></script>
-<h2>ТАБЛИЦА {{ values['name'] }}</h2>
+<link rel="stylesheet" href="./static/css/c">
 <main class="container py-5 text-center">
     <div class="toolbar">
 
@@ -23,6 +23,14 @@
                 <div class="text_button"><img src="../static/images/icons/plus.png" alt=""></div>
             </div>
         </button>
+
+
+            <div class="csv_button">
+                <input  type="file" onchange="" accept="text/csv" class="custom-file-input" id="file_button">
+                <button onclick="check_file()">Загрузить</button>
+            </div>
+
+
     </div>
     <div class='scroll-table'>
         <table id="table-view" class="table table-bordered">
