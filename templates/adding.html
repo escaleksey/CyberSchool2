@@ -6,7 +6,36 @@
 
 {% block main %}
 <main class="container py-5 text-center">
+    <h2>ДОБАВЛЕНИЕ В ТАБЛИЦУ {{ name }}</h2>
+    <br>
+    <form action="/add?type={{ type }}" method="POST">
+        {% for key, value in table_data.items() %}
 
+        {% if value['type'] == "text" %}
+        <div class="mb-3">
+            <input autocomplete="off" class="form-control mx-auto" id="{{ value['code'] }}" name="{{ value['code'] }}"
+                   placeholder="{{ key }}" type="text">
+        </div>
+        {% endif %}
+        {% if value['type'] == "number" %}
+        <div class="mb-3">
+            <input autocomplete="off" class="form-control mx-auto" id="{{ value['code'] }}" name="{{ value['code'] }}"
+                   placeholder="{{ key }}" type="number">
+        </div>
+        {% endif %}
+        {% if value['type'] == "checkbox" %}
+        <div class="mb-3">
+            <input autocomplete="off" class="form-check-input" id="{{ value['code'] }}" name="{{ value['code'] }}"
+                   placeholder="{{ key }}" type="checkbox">
+            <label class="form-check-label" for="Monitor_check">
+                      {{ key }}
+            </label>
+        </div>
+        {% endif %}
+
+        {% endfor %}
+        <button class="btn btn-primary" type="submit">Добавить</button>
+    </form>
 </main>
 
 {% endblock %}

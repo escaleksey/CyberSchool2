@@ -102,12 +102,38 @@ def add():
     if not type:
         return apology("Page not Found")
 
+    table_data, name = get_table_data(type)
     if request.method == "POST":
-        pass
+        data = {}
+        for key, value in table_data.items():
+            data_type = value['type']
+            field = value['code']
+            form_value = request.form.get(field)
+
+            if data_type == 'checkbox':
+                if form_value == 'on':
+                    form_value = True
+                else:
+                    form_value = False
+
+            if field == 'licences':
+                print(form_value)
+
+            if not form_value and data_type != 'checkbox':
+                print(key, field)
+                return apology(f"Missed {key}", 403)
+
+            if data_type == 'text':
+                data[field] = f"'{form_value}'"
+            else:
+                data[field] = str(form_value)
+
+        adding_func = get_adding_method(type, db2)
+        adding_func(data)
+
+        return redirect(type)
     else:
-        table_data = get_table_data(fill, type)
-        print(table_data)
-        return render_template("adding.html")
+        return render_template("adding.html", name=name, table_data=table_data, type=type)
 
 
 @app.route("/pc", methods=["GET", "POST"])
@@ -244,7 +270,7 @@ def login():
             return apology("invalid username and/or password", 403)
 
         # Remember which user has logged in
-        session["user_id"] = rows[0]["id_users"]
+        session["user_id"] = rows[0]["username"]
 
         # Redirect user to home page
         return redirect("/")

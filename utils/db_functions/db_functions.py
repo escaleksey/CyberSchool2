@@ -59,6 +59,7 @@ class DataBase:
         list_of_value = list(dict_of_value.values())
 
         cur = self.con.cursor()
+        """
         request = f'''INSERT OR IGNORE INTO pk(id_pk, type_pk, class_pk, details, amount_of_RAM, hard_disk,
         video_card, processor, CD_rom, external_network_card, OS_version, licences, licence_key, software, 
         personalization, item_number, network_name, user_name, local_IP_adress, local_inet_availability,
@@ -68,11 +69,24 @@ class DataBase:
         {list_of_value[9]}, "{list_of_value[10]}", {list_of_value[11]}, "{list_of_value[12]}", "{list_of_value[13]}",
         "{list_of_value[14]}", {list_of_value[15]},"{list_of_value[16]}", "{list_of_value[17]}", "{list_of_value[18]}",
          {list_of_value[19]}, {list_of_value[20]}, {list_of_value[21]}, "{list_of_value[22]}");'''
-
+        """
+        values = ', '.join(dict_of_value.values())
+        items = ', '.join(dict_of_value.keys())
+        request = f'''INSERT OR IGNORE INTO pk({items}) VALUES ({values})'''
+        print(request)
         cur.execute(request)
         self.con.commit()
         cur.close()
         return 1
+
+    def add_office_equipment(self, dict_of_value: dict) -> bool:
+        pass
+
+    def add_bank(self, dict_of_value: dict) -> bool:
+        pass
+
+    def add_equipment_received(self, dict_of_value: dict) -> bool:
+        pass
 
     def get_all_values_pk(self) -> list:
         cur = self.con.cursor()
