@@ -79,7 +79,6 @@ class DataBase:
 
         try:
             data = list(cur.execute(f"SELECT * FROM pk").fetchall())
-            print(data)
             cur.close()
             return data
         finally:
@@ -138,7 +137,6 @@ class DataBase:
         """
 
         sql_request = self.search.create_table_search(table_name, **kwargs)
-        print(sql_request)
         cur = self.con.cursor()
 
         try:
