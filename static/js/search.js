@@ -1,5 +1,31 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    function resetTable(data) {
+        console.log(data)
+
+        let elements = document.querySelectorAll('#row');
+        for (let elem of elements) {
+            elem.parentNode.removeChild(elem);
+        }
+
+        let tbody = document.getElementById("tbody")
+        console.log(tbody)
+        for (let elem of data) {
+
+            let tr = document.createElement('tr');
+            tr.setAttribute('id', 'row');
+
+            for (let elemItem of elem) {
+                let td = document.createElement('td');
+                td.innerText = elemItem;
+                tr.appendChild(td)
+            }
+
+            console.log(tr)
+            tbody.appendChild(tr)
+        }
+    }
+
     const convector = {
         "pc": {
             "ID": "id_pk",
@@ -76,7 +102,8 @@ document.addEventListener("DOMContentLoaded", function () {
             jsonData[convector[type][elem.name]] = encodeURIComponent(elem.value)
         }
         console.log(jsonData)
-        fetch("/pc",
+        fetch(
+            "/pc",
             {
                 headers: {
                     'Accept': 'application/json',
@@ -91,33 +118,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log(data); //3
             })
             .catch(function (res) {
-                console.log(res)
-            })
-
-        function resetTable(data) {
-            console.log(data)
-
-            let elements = document.querySelectorAll('#row');
-            for (let elem of elements) {
-                elem.parentNode.removeChild(elem);
-            }
-
-            let tbody = document.getElementById("tbody")
-            console.log(tbody)
-            for (let elem of data) {
-
-                let tr = document.createElement('tr');
-                tr.setAttribute('id','row');
-
-                for (let elemItem of elem) {
-                    let td = document.createElement('td');
-                    td.innerText = elemItem;
-                    tr.appendChild(td)
+                    console.log(res)
                 }
+            )
 
-                console.log(tr)
-                tbody.appendChild(tr)
-            }
-        }
+
     }
 });
