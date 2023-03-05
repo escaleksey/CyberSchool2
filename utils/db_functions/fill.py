@@ -17,7 +17,7 @@ def create_random_int(n=255):
     return random.randint(0, n)
 
 
-def generate_rows(data):
+def generate_row(data):
     row = {}
     for key, value in data.items():
         match value:
@@ -45,7 +45,7 @@ def generate_pc_rows(n):
     }
 
     for _ in range(n):
-        yield generate_rows(data)
+        yield generate_row(data)
 
 
 def fill_pc_table(n=25):
@@ -74,7 +74,7 @@ def generate_org_tech_rows(n):
     }
 
     for _ in range(n):
-        yield generate_rows(data)
+        yield generate_row(data)
 
 
 def fill_org_tech_table(n=25):
@@ -99,7 +99,7 @@ def generate_employee_rows(n):
     }
 
     for _ in range(n):
-        yield generate_rows(data)
+        yield generate_row(data)
 
 
 def fill_employee_table(n=25):

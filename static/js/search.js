@@ -22,14 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
             "Тип": "type_pk"
         },
         "office_equipment": {
-            "ID": "type_org",
-            "Монитор": "monitor",
-            "Принтер": "printer",
-            "МФУ": "mfu",
-            "Сканер": "skaner",
-            "Ксерокс": "xerox",
-            "Плоттер": "plotter",
-            "ИБП": "ibp"
+            "ID": "id_org_tech",
+            "Тип_оргтехники": "type_org",
         },
         "employees": {
             "ID": "employee_id",
@@ -87,8 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 td.innerText = elemItem;
                 tr.appendChild(td)
             }
-
-            console.log(tr)
             tbody.appendChild(tr)
         }
     }
@@ -97,16 +89,18 @@ document.addEventListener("DOMContentLoaded", function () {
     let window_url = window.location.href.split("/")
     let type = window_url[window_url.length - 1]
 
+
     document.querySelector("#search_button").onclick = function () {
         let jsonData = {}
         let elements = document.querySelectorAll('.search');
         for (let elem of elements) {
             console.log(elem)
-            jsonData[convector[type][elem.name]] = encodeURIComponent(elem.value)
+            jsonData[convector[type][elem.name]] = elem.value
         }
+        console.log(type)
         console.log(jsonData)
         fetch(
-            "/pc",
+            "/" + type,
             {
                 headers: {
                     'Accept': 'application/json',

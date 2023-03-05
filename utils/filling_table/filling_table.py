@@ -41,7 +41,7 @@ class FillTable():
 
     def fill_employees_table(self):
         data = self.db.get_all_values_employee()
-        titles = ['ID', 'ФИО', 'ID ПК', 'Полномочия', 'Дата', 'Состояние']
+        titles = ['ID', 'ФИО', 'Должность', 'ID ПК', 'Полномочия', 'Состояние', 'Дата']
 
         values = [list(elem) for elem in data]
 
