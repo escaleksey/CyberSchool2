@@ -78,11 +78,13 @@ def generate_org_tech_rows(n):
 
 
 def fill_org_tech_table(n=25):
+    print("end filling org_tech table of database")
     db = DataBase(f'{PROJECT_PATH}/static/db/database.db')
     data = generate_org_tech_rows(n)
 
     for row in data:
         db.add_org_tech(row)
+    print("end filling org_tech table of database")
 
 
 """EMPLOYERS"""
@@ -112,4 +114,32 @@ def fill_employee_table(n=25):
     print("end filling employee table of database")
 
 
+"""BANK LICENCES"""
 
+
+def generate_bank_licences_rows(n):
+    data = {
+        'name_of_product': 'str',
+        'personalization': 'bool',
+        'type_of_personalization': 'str',
+        'personalization_key': 'str',
+        'note': 'str'
+    }
+
+    for _ in range(n):
+        yield generate_row(data)
+
+
+def fill_bank_licences_table(n=25):
+    print("start filling bank_licences table of database")
+    db = DataBase(f'{PROJECT_PATH}/static/db/database.db')
+    data = generate_bank_licences_rows(n)
+
+    for row in data:
+        db.add_bank_licences(row)
+    print("end filling bank_licences table of database")
+
+
+# fill_pc_table()
+# fill_employee_table()
+fill_bank_licences_table()

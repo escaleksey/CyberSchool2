@@ -202,8 +202,6 @@ def employees():
     return render_template("tables.html", values=values)
 
 
-
-
 @app.route("/history")
 @login_required
 def history():

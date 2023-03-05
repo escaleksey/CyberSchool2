@@ -87,10 +87,10 @@ class DataBase:
         list_of_value = list(dict_of_value.values())
 
         cur = self.con.cursor()
-        request = f'''INSERT OR IGNORE INTO bank_licences(id_licences, name_of_product, personalization,
+        request = f'''INSERT OR IGNORE INTO bank_licences(name_of_product, personalization,
         type_of_personalization, personalization_key, note)
-         VALUES({list_of_value[0]}, "{list_of_value[1]}", {list_of_value[2]}, "{list_of_value[3]}",
-          "{list_of_value[4]}", "{list_of_value[5]}", "{list_of_value[6]}", "{list_of_value[7]}");'''
+         VALUES("{list_of_value[0]}", {list_of_value[1]}, "{list_of_value[2]}",
+          "{list_of_value[3]}", "{list_of_value[4]}");'''
 
         cur.execute(request)
         self.con.commit()
@@ -108,7 +108,7 @@ class DataBase:
         cur = self.con.cursor()
         request = f'''INSERT OR IGNORE INTO org_tech(id_org_tech, type_org)
          VALUES({list_of_value[0]}, "{list_of_value[1]}");'''
-
+        print(request)
         cur.execute(request)
         self.con.commit()
         cur.close()
