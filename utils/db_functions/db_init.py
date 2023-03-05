@@ -102,4 +102,23 @@ cur.execute("""CREATE TABLE users (
 );
 """)
 
+cur.execute(f'''INSERT OR IGNORE INTO org_tech(id_org_tech, type_org)
+         VALUES({1}, "Монитор");''')
+
+cur.execute(f'''INSERT OR IGNORE INTO org_tech(id_org_tech, type_org)
+         VALUES({2}, "Принтер");''')
+cur.execute(f'''INSERT OR IGNORE INTO org_tech(id_org_tech, type_org)
+         VALUES({3}, "МФУ");''')
+cur.execute(f'''INSERT OR IGNORE INTO org_tech(id_org_tech, type_org)
+         VALUES({4}, "Сканер");''')
+cur.execute(f'''INSERT OR IGNORE INTO org_tech(id_org_tech, type_org)
+         VALUES({5}, "Ксерокс");''')
+cur.execute(f'''INSERT OR IGNORE INTO org_tech(id_org_tech, type_org)
+         VALUES({6}, "Плоттер");''')
+cur.execute(f'''INSERT OR IGNORE INTO org_tech(id_org_tech, type_org)
+         VALUES({7}, "ИБП");''')
+
 conn.commit()
+
+
+
