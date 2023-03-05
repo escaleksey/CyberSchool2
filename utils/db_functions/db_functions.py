@@ -33,6 +33,18 @@ class DataBase:
         cur.close()
         return 1
 
+    def add_received_equipment(self, dict_of_value: dict) -> bool:
+        keys = ', '.join(dict_of_value.keys())
+        values = ', '.join(dict_of_value.values())
+        request = f'''INSERT OR IGNORE INTO equipment_received({keys})
+                 VALUES({values})'''
+
+        cur = self.con.cursor()
+        cur.execute(request)
+        self.con.commit()
+        cur.close()
+        return 1
+
     def add_card(self, dict_of_value: dict) -> bool:
         """
         :param dict_of_value

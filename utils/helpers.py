@@ -112,10 +112,10 @@ def get_table_data(type: str):
 def get_adding_method(type: str, db: DataBase):
     methods = {
         "pc": db.add_pk,
-        "office_equipment": db.add_office_equipment,
+        "office_equipment": db.add_org_tech,
         "employees": db.add_employee,
-        "bank": db.add_bank,
-        "equipment_received": db.add_equipment_received
+        "bank": db.add_bank_licences,
+        "equipment_received": db.add_received_equipment
     }
 
     return methods[type]
