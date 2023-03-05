@@ -41,8 +41,8 @@ class DataBase:
         list_of_value = list(dict_of_value.values())
 
         cur = self.con.cursor()
-        request = f'''INSERT OR IGNORE INTO employee(id_card, id_pk, structure, corpus, room_number, id_org_tech, data)
-         VALUES({list_of_value[0]}, {list_of_value[1]}, "{list_of_value[2]}", {list_of_value[3]},
+        request = f'''INSERT OR IGNORE INTO card(id_card, id_pk, structure, corpus, room_number, id_org_tech, data)
+         VALUES({list_of_value[0]}, {list_of_value[1]}, "{list_of_value[2]}", "{list_of_value[3]}",
           "{list_of_value[4]}", "{list_of_value[5]}", "{list_of_value[6]}", "{list_of_value[7]}");'''
 
         cur.execute(request)
@@ -74,11 +74,48 @@ class DataBase:
         cur.close()
         return 1
 
+    def add_bank_licences(self, dict_of_value: dict) -> bool:
+        """
+        :param dict_of_value
+        :return: None
+        добавляет лицензию в бд
+        """
+        list_of_value = list(dict_of_value.values())
+
+        cur = self.con.cursor()
+        request = f'''INSERT OR IGNORE INTO bank_licences(id_licences, name_of_product, personalization,
+        type_of_personalization, personalization_key, note)
+         VALUES({list_of_value[0]}, "{list_of_value[1]}", {list_of_value[2]}, "{list_of_value[3]}",
+          "{list_of_value[4]}", "{list_of_value[5]}", "{list_of_value[6]}", "{list_of_value[7]}");'''
+
+        cur.execute(request)
+        self.con.commit()
+        cur.close()
+        return 1
+
+    def add_org_tech(self, dict_of_value: dict) -> bool:
+        """
+        :param dict_of_value
+        :return: None
+        добавляет технику в бд
+        """
+        list_of_value = list(dict_of_value.values())
+
+        cur = self.con.cursor()
+        request = f'''INSERT OR IGNORE INTO org_tech(id_org_tech, type_org)
+         VALUES({list_of_value[0]}, "{list_of_value[1]}");'''
+
+        cur.execute(request)
+        self.con.commit()
+        cur.close()
+        return 1
+
     def get_all_values_pk(self) -> list:
         cur = self.con.cursor()
 
         try:
             data = list(cur.execute(f"SELECT * FROM pk").fetchall())
+            print(data)
             cur.close()
             return data
         finally:
@@ -158,6 +195,7 @@ class DataBase:
         finally:
             cur.close()
 
+
     def check_exist(self, table_name, id) -> bool:
         """
                 param: table_name - table for which produced by search
@@ -171,16 +209,19 @@ class DataBase:
                 """
 
         sql_request = self.search.create_table_search(table_name, id)
+        print(sql_request)
         cur = self.con.cursor()
         column_name = "id_" + f"{table_name}"
 
         try:
             if (cur.execute(f"SELECT {column_name} FROM {table_name} WHERE {column_name}='{id}'").fetchone()[0]) != 0:
+                self.con.commit()
+                cur.close()
                 return 1
         except:
+            self.con.commit()
+            cur.close()
             return 0
-        self.con.commit()
-        cur.close()
 
     def update_employee_status(self, id_employee, status) -> bool:
         """
