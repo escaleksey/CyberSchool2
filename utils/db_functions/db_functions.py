@@ -18,7 +18,7 @@ class DataBase:
         """
         :param dict_of_value
         :return: None
-        добавляет сертификат в бд
+        добавляет работника в бд
         """
         list_of_value = list(dict_of_value.values())
 
@@ -32,11 +32,29 @@ class DataBase:
         cur.close()
         return 1
 
+    def add_card(self, dict_of_value: dict) -> bool:
+        """
+        :param dict_of_value
+        :return: None
+        добавляет карту в бд
+        """
+        list_of_value = list(dict_of_value.values())
+
+        cur = self.con.cursor()
+        request = f'''INSERT OR IGNORE INTO employee(id_card, id_pk, structure, corpus, room_number, id_org_tech, data)
+         VALUES({list_of_value[0]}, {list_of_value[1]}, "{list_of_value[2]}", {list_of_value[3]},
+          "{list_of_value[4]}", "{list_of_value[5]}", "{list_of_value[6]}", "{list_of_value[7]}");'''
+
+        cur.execute(request)
+        self.con.commit()
+        cur.close()
+        return 1
+
     def add_pk(self, dict_of_value: dict) -> bool:
         """
         :param dict_of_value
         :return: None
-        добавляет сертификат в бд
+        добавляет пк в бд
         """
         list_of_value = list(dict_of_value.values())
 
@@ -125,7 +143,20 @@ class DataBase:
 
         try:
             cur.execute(sql_request)
-            return list(cur.fetchall())
+            data = list(cur.fetchall())
+
+            match table_name:
+                case "pk":
+                    data = [
+                        [
+                            elem[0], elem[1], elem[2], elem[3], elem[4], elem[5], elem[6], elem[7],
+                            elem[8], elem[9], elem[10], elem[13], elem[15], elem[16], elem[17],
+                            elem[18], elem[21], elem[22]
+                        ]
+                        for elem in data
+                    ]
+
+            return data
         finally:
             cur.close()
 
@@ -148,12 +179,33 @@ class DataBase:
         column_name = "id_" + f"{table_name}"
 
         try:
-            if cur.execute(f"select id from {table_name} where {column_name} = '{id}'").fetchone()[0] != None:
+            if (cur.execute(f"SELECT {column_name} FROM {table_name} WHERE {column_name}='{id}'").fetchone()[0]) != 0:
                 return 1
         except:
             return 0
         self.con.commit()
         cur.close()
+
+
+    def update_employee_status(self, id_employee, status) -> bool:
+        """
+            param: table_name - table for which produced by search
+            param: id_employee - id for checking
+
+            example:
+                    db.update_employee_status(
+                        id_employee=2,
+                        status="болеет"
+                        )
+                        """
+
+        cur = self.con.cursor()
+        cur.execute(f"UPDATE employee SET status={status} WHERE id_employee={id_employee}")
+        self.con.commit()
+        cur.close()
+        return 1
+
+
 
 """
 db = DataBase(f"{PROJECT_PATH}/static/db/database.db")
