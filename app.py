@@ -50,7 +50,7 @@ def index():
     """Show portfolio of stocks"""
     values = fill.fill_cards_table()
 
-    return render_template(f"index.html", values=values)
+    return render_template(f"tables.html", values=values)
 
 
 @app.route("/title", methods=["GET", "POST"])
