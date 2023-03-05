@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
             let td = document.createElement('td');
             td.setAttribute('class', 'text-center');
             tr.appendChild(td)
-            
+
             for (let elemItem of elem) {
                 let td = document.createElement('td');
                 td.innerText = elemItem;
@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let jsonData = {}
         let elements = document.querySelectorAll('.search');
         for (let elem of elements) {
+            console.log(elem)
             jsonData[convector[type][elem.name]] = encodeURIComponent(elem.value)
         }
         console.log(jsonData)

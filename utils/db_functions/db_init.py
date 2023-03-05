@@ -1,6 +1,8 @@
 import sqlite3
 
-conn = sqlite3.connect('../static/db/db.db')
+from __config__ import PROJECT_PATH
+
+conn = sqlite3.connect(f'{PROJECT_PATH}/static/db/database.db')
 cur = conn.cursor()
 
 # create tables
@@ -59,7 +61,7 @@ cur.execute("""CREATE TABLE org_tech (
 """)
 
 cur.execute("""CREATE TABLE pk (
-    id_pk                      INT     PRIMARY KEY,
+    id_pk                      INTEGER PRIMARY KEY AUTOINCREMENT,
     type_pk                    TEXT,
     class_pk                   TEXT,
     details                    TEXT,
